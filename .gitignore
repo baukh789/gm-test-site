@@ -1,0 +1,7 @@
+/.project
+/dist
+/node_modules
+/upload
+/.idea
+.DS_Store
+npm-debug.log

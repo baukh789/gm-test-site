@@ -1,0 +1,15 @@
+{
+  "name": "GridManagerTestSite",
+  "version": "0.0.1",
+  "description": "表格测试主页",
+  "author": "拭目以待",
+  "devDependencies": {
+    "express": "^4.15.2"
+  },
+  "scripts": {
+    "start": "node test"
+  },
+  "dependencies": {
+    "GridManager": "git://github.com/baukh789/GridManager.git#c508144466d9e724fb997d4c2d08555502398fc8"
+  }
+}
