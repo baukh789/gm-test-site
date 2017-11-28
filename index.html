@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>GridManager demo</title>
     <style type="text/css">
-        .demo-list {
+        .demo-loading{
+            height: 100%;
+            line-height: 100vh;
+            text-align: center;
+        }
+        .demo-area {
+            display: none;
             width: 100%;
             height: 400px;
             perspective: 800px;
@@ -23,56 +29,110 @@
             height: 250px;
             position: absolute;
             backface-visibility: visible;
-            opacity: 0.7;
+            opacity: 0.5;
             border: 1px solid #B8B5B5;
             background-repeat: no-repeat;
+            border: 2px solid #f90;
         }
         .demo1:hover{
             transform: rotateX(100deg) rotateY(180deg);
         }
         .demo1 .page-front{
-            background: url("http://www.lovejavascript.com/upload/menu/icon/9144_7.jpg");
             transform: translateZ(250px);
         }
         .demo1 .page-back{
-            background: url("http://www.lovejavascript.com/upload/menu/icon/4209_2.jpg");
             transform: translateZ(-250px);
         }
         .demo1 .page-left{
-            background: url("http://www.lovejavascript.com/upload/menu/icon/8321_8.jpg");
             transform: rotateY(90deg) translateZ(-250px);
         }
         .demo1 .page-right{
-            background: url("http://www.lovejavascript.com/upload/menu/icon/1147_6.jpg");
             transform: rotateY(90deg) translateZ(250px);
         }
         .demo1 .page-up{
             height: 500px;
-            background: url("http://gridmanager.lovejavascript.com/assets/images/logo.500.500.png");
             background-size: 500px 500px;
             transform: rotateX(90deg) translateZ(250px) rotateY(-180deg);
         }
         .demo1 .page-down{
             height: 500px;
-            background: url("http://www.lovejavascript.com/upload/user/photo/8495_1.jpg");
             background-size: 500px 500px;
             transform: rotateX(90deg);
             cursor: pointer;
         }
-
+        p{
+            height: 50px;
+            line-height: 50px;
+            font-size: 48px;
+            color: #f90;
+            font-weight: 600;
+            margin-top:-150px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-
-<section class="demo-list">
+<section class="demo-loading">demo loading...</section>
+<section class="demo-area">
     <div class="demo1">
         <div class="page page-front"></div>
         <div class="page page-back"></div>
         <div class="page page-left"></div>
         <div class="page page-right"></div>
         <div class="page page-up"></div>
-        <div class="page page-down" title="点击进入" onclick="javascript:window.location.href='./node_modules/GridManager/demo/index.html';"></div>
+        <div class="page page-down" onclick="javascript:window.location.href='./node_modules/GridManager/demo/index.html';"></div>
     </div>
+    <p>点击进入</p>
 </section>
+<script>
+    var loadingStatusArray = [{
+        loaded: false,
+        url:'http://www.lovejavascript.com/upload/menu/icon/9144_7.jpg',
+        queryText: '.page-front'
+    },{
+        loaded: false,
+        url:'http://www.lovejavascript.com/upload/menu/icon/4209_2.jpg',
+        queryText: '.page-back'
+    },{
+        loaded: false,
+        url:'http://www.lovejavascript.com/upload/menu/icon/8321_8.jpg',
+        queryText: '.page-left'
+    },{
+        loaded: false,
+        url:'http://www.lovejavascript.com/upload/menu/icon/1147_6.jpg',
+        queryText: '.page-right'
+    },{
+        loaded: false,
+        url:'http://gridmanager.lovejavascript.com/assets/images/logo.500.500.png',
+        queryText: '.page-up'
+    },{
+        loaded: false,
+        url:'http://www.lovejavascript.com/upload/user/photo/8495_1.jpg',
+        queryText: '.page-down'
+    }];
+    loadingStatusArray.forEach(function(item){
+        createImg(item);
+    });
+    function createImg(obj) {
+        var frontImg = new Image();
+        frontImg.src = obj.url;
+        frontImg.onload = function(){
+            obj.loaded = true;
+            document.querySelector(obj.queryText).style.backgroundImage = 'url('+obj.url+')';
+            document.querySelector(obj.queryText).style.color = '#f00010';
+            showDemo();
+        };
+    }
+
+    function showDemo(){
+        var isOk = loadingStatusArray.every(function(item){
+           return item.loaded;
+        });
+        if(isOk){
+            document.querySelector('.demo-loading').style.display = 'none';
+            document.querySelector('.demo-area').style.display = 'block';
+        }
+    }
+</script>
 </body>
 </html>
