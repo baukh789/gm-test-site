@@ -10,6 +10,7 @@
     "start": "node test"
   },
   "dependencies": {
-    "GridManager": "git://github.com/baukh789/GridManager.git#c508144466d9e724fb997d4c2d08555502398fc8"
+    "GridManager": "git://github.com/baukh789/GridManager.git#c508144466d9e724fb997d4c2d08555502398fc8",
+    "gridmanager": "^2.5.2"
   }
 }
