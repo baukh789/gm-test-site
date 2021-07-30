@@ -7,7 +7,7 @@
     "express": "^4.15.2"
   },
   "scripts": {
-    "start": "node test"
+    "build": "cp -r /Users/baukh/work/GridManager/dist/. /Users/baukh/work/gm-test-site/gridmanager/ && cp -r /Users/baukh/work/GridManager/src/demo/. /Users/baukh/work/gm-test-site/gridmanager/demo/ "
   },
   "dependencies": {
     "GridManager": "git://github.com/baukh789/GridManager.git#c508144466d9e724fb997d4c2d08555502398fc8",
