@@ -66,7 +66,7 @@ const GM_PUBLISH_METHOD_MAP = {
         key: 'updateRowData',
         relyInit: true,
         title: '更新指定行所使用的数据',
-        code: `GridManager.updateRowData('${gridManagerName}', 'id', {id: 92, title: 'ccc'});`
+        code: `GridManager.updateRowData('${gridManagerName}', 'id', {id: 112, title: 'ccc'});`
     },
     updateTreeState: {
         key: 'updateTreeState',
@@ -86,6 +86,12 @@ const GM_PUBLISH_METHOD_MAP = {
         title: '设置表头配置区域可视状态',
         code: `GridManager.setConfigVisible('${gridManagerName}', true);`
     },
+	setLineHeight: {
+		key: 'setLineHeight',
+		relyInit: true,
+		title: '配置行的高度',
+		code: `GridManager.setLineHeight('${gridManagerName}', '70px');`
+	},
     showTh: {
         key: 'showTh',
         relyInit: true,
@@ -298,6 +304,12 @@ const demo1 = {
             // 初始渲染时是否加载数据
             // firstLoading: false,
 
+			// 启用虚拟滚动
+			virtualScroll: {
+				useVirtualScroll: true,
+				virtualNum: 20
+			},
+
             // supportAutoOrder: false,
             // 自动序号配置
             autoOrderConfig: {
@@ -387,7 +399,7 @@ const demo1 = {
                     console.log(list, tableData);
                 }
             },
-            summaryHandler: function(data){
+            summaryHandler: function(data) {
                 let readNumber = 0;
                 data.forEach(item => {
                     readNumber += item.readNumber;
@@ -499,11 +511,11 @@ const demo1 = {
                 // }
 
                 // 指定第92行不可选中
-                if (row.id === 92) {
-                        // row.gm_checkbox = true;
-                    row.gm_checkbox_disabled = true;
-                    row.gm_row_class_name = 'test-row-class';
-                }
+                // if (row.id === 92) {
+                //         // row.gm_checkbox = true;
+                //     row.gm_checkbox_disabled = true;
+                //     row.gm_row_class_name = 'test-row-class';
+                // }
                 return row;
             },
 
