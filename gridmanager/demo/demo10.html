@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="stylesheet" type="text/css" href="../css/gm.css">
-	<script type="text/javascript" src="../js/gm.js"></script>
-	<title>GridManager:使用静态数据渲染</title>
+	<link rel="stylesheet" type="text/css" href="../index.css">
+	<script type="text/javascript" src="../index.js"></script>
+	<title>GridManager:万条不卡</title>
 	<style>
 		html, body{
 			width: 100%;
@@ -31,6 +31,9 @@
 			border: 0;
 			border-top: 1px solid #eee;
 		}
+		.table-main{
+			height: calc(100% - 52px);
+		}
 		.bottom-bar{
 			background: #f8f8f8;
 			padding: 10px;
@@ -49,9 +52,12 @@
 </head>
 
 <body>
-<table grid-manager="cccc"></table>
+<div class="table-main">
+	<table grid-manager="cccc"></table>
+</div>
 <div class="bottom-bar">
 	<a href="https://github.com/baukh789/GridManager/blob/master/src/demo/demo10.html" target="_blank">查看源码</a>
+	<button id="change-auto-play"></button>
 </div>
 
 <script>
@@ -77,6 +83,9 @@
 	};
 </script>
 <script type="text/javascript">
+	// 用于demo初始化，以及切换button显示状态
+	window.supportAutoPlay = true;
+
 	// 实例化
 	const now = Date.now();
 	var table = document.querySelector('table[grid-manager]');
@@ -86,10 +95,25 @@
 			supportAjaxPage: false,
 			virtualScroll: {
 				useVirtualScroll: true,
-				virtualNum: 20
+				virtualNum: 40
 			},
 			height: '100%',
 			ajaxData,
+
+			cellHover: (row, rowIndex, colIndex, td) => {
+				return {
+					text: `当前第${rowIndex + 1}行, 第${colIndex + 1}列`
+				};
+			},
+			// 支持导出表格数据
+			supportAutoPlay: window.supportAutoPlay,
+			autoPlayConfig: {
+				// 每次轮播结束后停顿的时间
+				interval: 5,
+
+				// 每帧滚动的距离(px)
+				step: 500
+			},
 			exportConfig: {
 				handler: (fileName, query, pageData, sortData, selectedList, tableData) => {
 					GM.showLoading('test');
@@ -138,6 +162,20 @@
 		});
 	}
 	init();
+</script>
+<script>
+	const button = document.querySelector('#change-auto-play');
+	button.innerText = window.supportAutoPlay ? '停止轮播' : '开启轮播';
+	button.addEventListener('click', function (){
+		if (window.supportAutoPlay) {
+			window.GM.stopAutoPlay('test');
+			this.innerText = '开启轮播';
+		} else {
+			window.GM.startAutoPlay('test');
+			this.innerText = '停止轮播';
+		}
+		window.supportAutoPlay = !window.supportAutoPlay;
+	});
 </script>
 </body>
 </html>

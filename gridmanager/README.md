@@ -1,4 +1,4 @@
-# GridManager.js
+# GridManager [一套代码多框架运行]
 > 快速、灵活的对Table标签进行实例化，让Table标签充满活力。
 
 ![image](https://s2.ax1x.com/2019/04/16/AxA4xK.png)
@@ -39,34 +39,44 @@
 | 嵌套表头 | 无层级限制配置复杂的表格实例 |
 
 ## 安装
-```javascript
+```
 npm install gridmanager --save
 ```
+
+### 安装文件目录及说明
+- index.css `样式文件，原生及框架使用同一份样式文件`
+- index.js `原生使用的js文件`
+- vue2 `vue2框架使用的js文件`
+- react `react框架使用的js文件`
+- angular-1.x.js `angular1.x使用的js文件`
 
 ## 引用
 ### ES6+
 ```
-import 'gridmanager/css/gm.css';
-import GridManager from 'gridmanager';
+import 'gridmanager/index.css'; // 各框架通过样式文件
+import GridManager from 'gridmanager'; // 原生js引用方式
+import GridManager from 'gridmanager/vue2'; // vu2引用方式
+import GridManager from 'gridmanager/react'; // react引用方式
+import GridManager from 'gridmanager/angular-1.x'; // angular-1.x引用方式
 ```
 
 ### ES5
 ```
-<link rel="stylesheet" href="/node_modules/gridmanager/css/gm.css">
-<script src="/node_modules/gridmanager/js/gm.js"></script>
+<link rel="stylesheet" href="gridmanager/index.css">
+<script src="gridmanager/index.js"></script>
 ```
 
 ## API
-- [API](http://gridmanager.lovejavascript.com/api/index.html)
+- [API](https://gridmanager.lovejavascript.com/api/index.html)
 
 ## Demo
-- [简单的示例](http://gridmanager.lovejavascript.com/demo/index.html)
-- [复杂的示例](http://develop.lovejavascript.com/node_modules/gridmanager/demo/index.html)
+- [简单的示例](https://gridmanager.lovejavascript.com/demo/index.html)
+- [复杂的示例](https://develop.lovejavascript.com/)
 
-## 相关链接
-- [GridManager by Angular 1.x](https://github.com/baukh789/GridManager-Angular-1.x)
-- [GridManager by Vue](https://github.com/baukh789/GridManager-Vue)
-- [GridManager by React](https://github.com/baukh789/GridManager-React)
+## 框架版本介绍
+- [GridManager by Angular 1.x](https://github.com/baukh789/GridManager/tree/master/src/framework/angular-1.x/README.md)
+- [GridManager by Vue](https://github.com/baukh789/GridManager/tree/master/src/framework/vue/README.md)
+- [GridManager by React](https://github.com/baukh789/GridManager/tree/master/src/framework/react/README.md)
 
 ## 示例
 ### 使用默认配置
@@ -75,7 +85,7 @@ import GridManager from 'gridmanager';
 ```
 ```javascript
 document.querySelector('table').GM({
-	gridManagerName: 'demo-baseCode',
+    gridManagerName: 'demo-baseCode',
     ajaxData: 'https://www.lovejavascript.com/learnLinkManager/getLearnLinkList',
     ajaxType: 'POST',
     query: {pluginId: 1},
@@ -102,7 +112,7 @@ document.querySelector('table').GM({
 document.querySelector('table').GM({
 	gridManagerName: 'demo-ajaxPageCode',
     ajaxData: 'https://www.lovejavascript.com/learnLinkManager/getLearnLinkList',
-    ajaxType: 'POST'
+    ajaxType: 'POST',
     query: {pluginId: 1},
     supportAjaxPage: true,
     columnData: [
@@ -129,35 +139,37 @@ GM.refreshGrid('demo-ajaxPageCode');
 GM.setQuery('demo-ajaxPageCode', {name: 'baukh'});
 ```
 
-其它更多请直接访问[API](http://gridmanager.lovejavascript.com/api/index.html)
+其它更多请直接访问[API](https://gridmanager.lovejavascript.com/api/index.html)
 
 ## 数据格式
-> 这是标准格式, 如果返回格式不同。可以通过参数或responseHandler进行修改。 具体请参考[API](http://gridmanager.lovejavascript.com/api/index.html#responseHandler)
+> 这是标准格式, 如果返回格式不同。可以通过参数或responseHandler进行修改。 具体请参考[API](https://gridmanager.lovejavascript.com/api/index.html#responseHandler)
 
-```javascript
+```
 {
-    "data":[{
-        "name": "baukh",
-        "age": "28",
-        "createDate": "2015-03-12",
-        "info": "野生前端程序",
-        "operation": "修改"
-    },
-    {
-        "name": "baukh",
-        "age": "28",
-        "createDate": "2015-03-12",
-        "info": "野生前端程序",
-        "operation": "修改"
-    },
-    {
-        "name": "baukh",
-        "age": "28",
-        "createDate": "2015-03-12",
-        "info": "野生前端程序",
-        "operation": "修改"
-    }],
-    "totals": 1682
+    "data": [
+        {
+            "name": "baukh",
+            "age": "28",
+            "createDate": "2015-03-12",
+            "info": "野生前端程序",
+            "operation": "修改"
+        },
+        {
+            "name": "baukh",
+            "age": "28",
+            "createDate": "2015-03-12",
+            "info": "野生前端程序",
+            "operation": "修改"
+        },
+        {
+            "name": "baukh",
+            "age": "28",
+            "createDate": "2015-03-12",
+            "info": "野生前端程序",
+            "operation": "修改"
+        }
+    ],
+   totals: 1682
 }
 ```
 
@@ -166,6 +178,7 @@ GM.setQuery('demo-ajaxPageCode', {name: 'baukh'});
 
 - [element-ui](https://github.com/xtfan21/GridManager-element-skin)
 - [ant-design](https://github.com/BoWang816/GridManager-antDesign-skin)
+- [skin tool](http://skin.degapp.com/)
 
 ## 贡献者
 <table>
